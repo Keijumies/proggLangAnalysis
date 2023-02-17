@@ -10,26 +10,30 @@ import numpy as np
 import matplotlib.pyplot as plt
 import trompy as tp
 
-lingo_data = pd.read_csv("C:/Users/Otto/Documents/GitHub/proggLangAnalysis/data/data.csv")
+data = pd.read_csv("C:/Users/Otto/Documents/GitHub/proggLangAnalysis/data/data.csv")
 big_list = []
 
 # basic indexing in dataframe['key'][index]
 
 # split each string with split(;), save into list and append to big list
-for i, row in lingo_data.iterrows():
-    x = lingo_data['LanguagesWorkedWith'][i].split(';')
+for i, row in data.iterrows():
+    x = data['LanguagesWorkedWith'][i].split(';')
     big_list.append(x)
 
 #using james library to combine a list of list to a list.
 big_list = tp.flatten_list(big_list)
 
-print(big_list)
+# saving the list into a pandas series
+big_list_series = pd.Series(big_list)
 
-# saving the list into a pandas dataframe
-df_lingo = pd.DataFrame(big_list)
+# get unique values from the pandas series
+unique = big_list_series.unique().tolist()
 
-# get unique values from the dataframe
-# make a sett
-languages_unique = df_lingo.drop_duplicates()
-print(languages_unique)
-print(type(languages_unique))
+# counting function that adds the count and name to a list
+def counting(data,reff):
+    for i in range(len(reff)):
+        name_number_list.append((reff[i], data.count(reff[i])))
+
+name_number_list = []
+counting(big_list,unique)
+
