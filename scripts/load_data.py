@@ -29,11 +29,27 @@ big_list_series = pd.Series(big_list)
 # get unique values from the pandas series
 unique = big_list_series.unique().tolist()
 
-# counting function that adds the count and name to a list
+# counting function that adds the count and name to separate lists
 def counting(data,reff):
     for i in range(len(reff)):
-        name_number_list.append((reff[i], data.count(reff[i])))
+        name_list.append((reff[i]))
+        count_list.append(data.count(reff[i]))
 
-name_number_list = []
-counting(big_list,unique)
+name_list = []
+count_list = []
+counting(big_list,unique) # running function with data and unique names
+
+#sorting the count and name list
+sorted_count = np.argsort(count_list)[::-1]
+
+# use the sorted indices to reorder the list of strings
+sorted_name = [name_list[i] for i in sorted_count]
+print(sorted_name,sorted_count)
+
+plt.bar(sorted_name,sorted(count_list)[::-1])
+plt.title('Programming Language Popularity')
+plt.xlabel('')
+plt.xticks(rotation=90)
+plt.ylabel('Count')
+plt.show()
 
