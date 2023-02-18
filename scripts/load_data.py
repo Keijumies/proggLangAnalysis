@@ -39,7 +39,7 @@ name_list = []
 count_list = []
 counting(big_list,unique) # running function with data and unique names
 
-#sorting the count and name list
+#sorting the count(descending) and getting the new order of indexes
 sorted_count = np.argsort(count_list)[::-1]
 
 # use the sorted indices to reorder the list of strings
